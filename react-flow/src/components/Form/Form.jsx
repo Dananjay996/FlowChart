@@ -1,10 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, {useState } from "react";
+import {v4 as uuidv4} from 'uuid';
 import InputFull from "./InputFull";
 import Button from "../UI/Button";
 
 function Form() {
   const [val, setVal] = useState([[]]);
+  // const [jsonVal,setJsonVal] = useState([]);
+
+  // const id = useId();
   //   const router = useRouter();
 
   const dynamicInputAddHandler = () => {
@@ -31,7 +35,17 @@ function Form() {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("Clicked");
-    console.log(val);
+    console.log('val array is: ',val);
+    const jsonArray = [];
+    // let id = 2;
+    let xVal = 0, yVal = 100;
+    val.forEach((value) => {
+      jsonArray.push({id: uuidv4(),position: {x: xVal, y: yVal},data: {label: value}});
+      xVal += 10;
+      yVal += 50;
+    })
+
+    console.log('Json array is: ',jsonArray);
   };
 
   return (
