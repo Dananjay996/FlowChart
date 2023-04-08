@@ -62,7 +62,7 @@ function Form() {
   };
 
   return (
-    <div className="w-full max-w-md ">
+    <div className="w-full max-w-md m-auto">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col gap-4 ">
         <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight pl-2 pb-5 text-center">
           Enter the values
