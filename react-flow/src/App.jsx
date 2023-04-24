@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import data from "./components/mocks/data.json";
+import data from "./components/mocks/data-vis.json";
 import Tree from "./components/Tree";
 import { transformData } from "./components/utils/data-transformer";
 import Hex from "./assets/Hex";
