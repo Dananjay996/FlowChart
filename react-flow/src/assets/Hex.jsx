@@ -5,17 +5,21 @@ export default function Hex({ data }) {
   function showForm() {
     // Create a form element
     const form = document.createElement("form");
+    form.className = "form-box";
 
     // Create input field for changing name
     const input = document.createElement("input");
     input.type = "text";
     input.placeholder = "Enter new name...";
+    input.value = data.DisplayName;
+    input.className = "form-input"; // Add class to input element
     form.appendChild(input);
 
     // Create submit button
     const submitBtn = document.createElement("input");
     submitBtn.type = "submit";
     submitBtn.value = "Submit";
+    submitBtn.className = "form-submit-btn"; // Add class to submit button element
     form.appendChild(submitBtn);
 
     // Add event handler for form submission
