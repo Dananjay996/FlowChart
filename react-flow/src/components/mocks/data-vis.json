@@ -2,6 +2,7 @@
   "data": [
     {
       "DisplayName": "Data",
+      "description": "List of all data visualization tool",
       "Childs": [
         {
           "DisplayName": "Interactive tools",
@@ -40,6 +41,8 @@
             },
             {
               "DisplayName": "Desktop",
+              "description": "Destop-based applications for authoring data visualisations",
+
               "Childs": [
                 {
                   "DisplayName": "Tableau Desktop",

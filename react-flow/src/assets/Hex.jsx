@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Hex({ data }) {
-  console.log(data.DisplayName);
+  const [onShowDetails, setOnShowDetails] = useState(false);
+  console.log(data);
   function showForm() {
     // Create a form element
     const form = document.createElement("form");
@@ -38,6 +39,11 @@ export default function Hex({ data }) {
 
   return (
     <>
+      {onShowDetails && (
+        <text dx="0" dy="10" fontSize="5">
+          {data.description}
+        </text>
+      )}
       <svg
         version="1.1"
         id="Layer_1"
@@ -47,17 +53,18 @@ export default function Hex({ data }) {
         viewBox="0 0 125.44 122.88"
         width="29"
         height="29"
+        onClick={() => setOnShowDetails(!onShowDetails)}
+        // onMouseLeave={() => setOnShowDetails(false)}
       >
         <path d="M55.06,1.07l51.37,29.66v61.43l-53.22,30.73L0,92.15V30.73L53.22,0L55.06,1.07L55.06,1.07z M76.13,21.74L53.22,8.51 L7.39,34.97v52.94l45.83,26.46l45.83-26.46V34.97L76.13,21.74L76.13,21.74z" />
+
+        <polygon
+          points="55 5,105 30,105 90, 50 120,3 90,5 30"
+          fill="transparent"
+        />
+
         <g onClick={() => showForm()}>
-          <circle
-            cx="115"
-            cy="60"
-            r="10"
-            // stroke="black"
-            // stroke-width="0.05"
-            fill="white"
-          />
+          <circle cx="115" cy="60" r="10" fill="white" />
           <text dx="106" dy="70" fontSize="30">
             +
           </text>

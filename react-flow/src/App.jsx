@@ -19,7 +19,7 @@ export default function App() {
       <Tree
         data={transformedData}
         nodeRender={(node) => {
-          console.log("node", node.data.DisplayName);
+          // console.log("node", node.data);
           return (
             <Fragment>
               {node.parent ? (
