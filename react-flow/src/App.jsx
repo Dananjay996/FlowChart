@@ -19,10 +19,11 @@ export default function App() {
       <Tree
         data={transformedData}
         nodeRender={(node) => {
+          console.log("node", node.data.DisplayName);
           return (
             <Fragment>
               {node.parent ? (
-                <Hex className="d3-tree-nodes" />
+                <Hex className="d3-tree-nodes" data={node.data} />
               ) : (
                 <Logo className="d3-tree-nodes" />
               )}

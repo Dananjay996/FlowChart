@@ -38,37 +38,26 @@ export default (props) => {
             <g transform={`scale(${interpolated(node.depth * 0.1)})`}>
               {nodeRender(node, i)}
             </g>
-            {!node.children ? (
-              <g>
-                <text className="text-call-name" dy="2" dx="14">
-                  {node.data.DisplayName}
-                </text>
-                <text
-                  className="text-time-stamp"
-                  dy="2"
-                  dx={node.data.DisplayName.length * 3 + 15}
-                >
-                  1123.13ms
-                </text>
-              </g>
-            ) : (
-              <g>
-                <text
-                  className="text-call-name"
-                  dy="20"
-                  dx={-node.data.DisplayName.length * 2 - 13}
-                >
-                  {node.data.DisplayName}
-                </text>
-                <text
-                  className="text-time-stamp"
-                  dy="20"
-                  dx={node.data.DisplayName.length - 7}
-                >
-                  1123.13ms
-                </text>
-              </g>
-            )}
+
+            <g>
+              <text
+                className="text-call-name"
+                dy="20"
+                dx={-node.data.DisplayName.length * 2 - 13}
+              >
+                {node.data.DisplayName}
+              </text>
+
+              {/* <rect
+                className="plus-icon"
+                dy="20" // Adjust x and y coordinates to position the icon
+                dx={-node.data.DisplayName.length * 2 - 13}
+                width="20"
+                height="20"
+                onClick={() => handlePlusIconClick(node)} // Add onClick event handler to handle click event
+              /> */}
+            </g>
+
             {node.children ? (
               <g>
                 <rect
