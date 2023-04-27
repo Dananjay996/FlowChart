@@ -8,8 +8,9 @@ export function modifyDisplayNameById(id, newDisplayName, jsonData) {
       if ("DisplayName" in jsonData) {
         // If the 'DisplayName' key exists in the current data point
         jsonData["DisplayName"] = newDisplayName; // Update the display name value
-        break; // Exit the loop after the update
+        break;
       }
     }
   }
+  console.log("json mmodify", jsonData);
 }

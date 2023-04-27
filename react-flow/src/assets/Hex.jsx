@@ -1,41 +1,49 @@
 import React, { useState } from "react";
+import Button from "../components/UI/Button";
+import Form from "./Form";
 
 export default function Hex({ data }) {
   const [onShowDetails, setOnShowDetails] = useState(false);
+  const [onShowForm, setOnShowForm] = useState(false);
   console.log(data);
   function showForm() {
-    // Create a form element
-    const form = document.createElement("form");
-    form.className = "form-box";
+    setOnShowForm(!onShowForm);
+    // // Create a form element
+    // const form = document.createElement("form");
+    // form.className = "form-box";
 
-    // Create input field for changing name
-    const input = document.createElement("input");
-    input.type = "text";
-    input.placeholder = "Enter new name...";
-    input.value = data.DisplayName;
-    input.className = "form-input"; // Add class to input element
-    form.appendChild(input);
+    // // Create input field for changing name
+    // const input = document.createElement("input");
+    // input.type = "text";
+    // input.placeholder = "Enter new name...";
+    // input.value = data.DisplayName;
+    // input.className = "form-input"; // Add class to input element
+    // form.appendChild(input);
 
-    // Create submit button
-    const submitBtn = document.createElement("input");
-    submitBtn.type = "submit";
-    submitBtn.value = "Submit";
-    submitBtn.className = "form-submit-btn"; // Add class to submit button element
-    form.appendChild(submitBtn);
+    // // Create submit button
+    // const submitBtn = document.createElement("input");
+    // submitBtn.type = "submit";
+    // submitBtn.value = "Submit";
+    // submitBtn.className = "form-submit-btn"; // Add class to submit button element
+    // form.appendChild(submitBtn);
 
-    // Add event handler for form submission
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const newName = input.value;
-      // Perform action with new name, e.g. update display or send data to server
-      console.log(`New name ${data.DisplayName}: ${newName}`);
-      // Remove form from DOM
-      form.remove();
-    });
+    // // Add event handler for form submission
+    // form.addEventListener("submit", (e) => {
+    //   e.preventDefault();
+    //   const newName = input.value;
+    //   // Perform action with new name, e.g. update display or send data to server
+    //   console.log(`New name ${data.DisplayName}: ${newName}`);
+    //   // Remove form from DOM
+    //   form.remove();
+    // });
 
-    // Append form to DOM
-    document.body.appendChild(form);
+    // // Append form to DOM
+    // document.body.appendChild(form);
   }
+
+  const submitHandler = () => {
+    setOnShowForm(!onShowForm);
+  };
 
   return (
     <>
@@ -52,19 +60,28 @@ export default function Hex({ data }) {
       >
         {onShowDetails && (
           <foreignObject x="100" y="100" width="250" height="250">
-            <div xmlns="http://www.w3.org/1999/xhtml" s>
-              <div class=" bg-blue-500 opacity-0 animate-fade  fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center transition-opacity duration-300 ease-in-out">
-                <div class="bg-white p-4 rounded-md shadow-md">
-                  <h2 class="text-lg font-semibold mb-2">{data.DisplayName}</h2>
-                  <p class="text-gray-600 mb-4">{data.description}</p>
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <div className=" bg-blue-500 opacity-0 animate-fade  fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center transition-opacity duration-300 ease-in-out">
+                <div className="bg-white p-4 rounded-md shadow-md">
+                  <h2 className="text-lg font-semibold mb-2">
+                    {data.DisplayName}
+                  </h2>
+                  <p className="text-gray-600 mb-4">{data.description}</p>
                   <button
                     id="closePopupBtn"
-                    class="bg-gray-500 text-white px-3 py-1 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
+                    className="bg-gray-500 text-white px-3 py-1 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
                   >
                     Close
                   </button>
                 </div>
               </div>
+            </div>
+          </foreignObject>
+        )}
+        {onShowForm && (
+          <foreignObject x="100" y="100" width="250" height="250">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <Form data={data} />
             </div>
           </foreignObject>
         )}

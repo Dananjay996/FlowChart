@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import data from "./components/mocks/data-vis.json";
 import { transformData } from "./components/utils/data-transformer";
 import Hex from "./assets/Hex";
 import Logo from "./assets/Logo";
@@ -8,10 +7,12 @@ import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import Form from "./components/Form/Form";
 import Container from "./components/Tree";
-
-const transformedData = transformData(data);
+import { useSelector } from "react-redux";
 
 export default function App() {
+  const data = useSelector((state) => state.jsonHelper);
+  console.log("App", data);
+  const transformedData = transformData(data);
   return (
     <div className="App">
       {/* <Header /> */}
