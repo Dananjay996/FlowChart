@@ -3,7 +3,7 @@ import data from "../components/mocks/data-vis.json";
 import { modifyDisplayNameById } from "../helper/jsonHelper";
 
 export const jsonSlice = createSlice({
-  name: "counter",
+  name: "jsonHelper",
   initialState: data,
   reducers: {
     modifyDisplayName: (state, action) => {

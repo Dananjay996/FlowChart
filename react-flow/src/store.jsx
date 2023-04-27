@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
+import jsonReducer from "./slice/jsonSlice";
 
 export default configureStore({
-  reducer: { jsonHelper: jsonHelperReducer },
+  reducer: { jsonHelper: jsonReducer },
 });

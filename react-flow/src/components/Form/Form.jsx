@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { modifyDisplayName } from "../../slice/jsonSlice";
 
 function Form() {
-  const node = useSelector((state) => state.jsonSlice.modifyDisplayNameById);
+  const node = useSelector((state) => state.jsonHelper.modifyDisplayName);
   const dispatch = useDispatch();
 
   const [val, setVal] = useState([[]]);
