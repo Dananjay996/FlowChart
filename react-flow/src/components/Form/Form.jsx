@@ -2,8 +2,13 @@
 import React, { useState } from "react";
 import InputFull from "./InputFull";
 import Button from "../UI/Button";
+import { useSelector, useDispatch } from "react-redux";
+import { modifyDisplayName } from "../../slice/jsonSlice";
 
 function Form() {
+  const node = useSelector((state) => state.jsonSlice.modifyDisplayNameById);
+  const dispatch = useDispatch();
+
   const [val, setVal] = useState([[]]);
 
   const dynamicInputAddHandler = () => {
@@ -31,6 +36,7 @@ function Form() {
     e.preventDefault();
     console.log("Clicked");
     console.log("val array is: ", val);
+    dispatch(modifyDisplayName(id));
   };
 
   return (
