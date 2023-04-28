@@ -41,8 +41,8 @@ function Form({ data, onClose, type }) {
           description: onInput.description,
         })
       );
-      onClose();
     }
+    onClose();
   };
   return (
     <div className="w-full max-w-md m-auto">

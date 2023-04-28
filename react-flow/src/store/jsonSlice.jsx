@@ -8,19 +8,13 @@ const jsonSlice = createSlice({
   reducers: {
     modifyData(state, action) {
       const { id } = action.payload;
-
       // Modify the state using the modifyDisplayNameById function
       state = modifyDataById(id, state, action.payload);
-
-      // Return the updated state
     },
     addData(state, action) {
       const { id } = action.payload;
-      console.log("action", action.payload);
       // Modify the state using the modifyDisplayNameById function
       state = addChildById(id, state, action.payload);
-
-      // Return the updated state
     },
   },
 });

@@ -7,21 +7,6 @@ export default function Hex({ data }) {
   const [onShowDetails, setOnShowDetails] = useState(false);
   const [onShowForm, setOnShowForm] = useState(false);
   const [onShowAddForm, setOnShowAddForm] = useState(false);
-  // console.log(data);
-  function showForm() {
-    setOnShowForm(!onShowForm);
-  }
-
-  const onCloseHandler = () => {
-    setOnShowDetails(false);
-  };
-  const onUpdateHandler = () => {
-    setOnShowForm(false);
-  };
-  const onAddHandler = () => {
-    setOnShowAddForm(!onShowAddForm);
-  };
-  console.log("hex", data);
 
   return (
     <>
@@ -41,8 +26,8 @@ export default function Hex({ data }) {
             <div xmlns="http://www.w3.org/1999/xhtml">
               <Detail
                 data={data}
-                onClose={onCloseHandler}
-                onUpdate={showForm}
+                onClose={() => setOnShowDetails(false)}
+                onUpdate={() => setOnShowForm(!onShowForm)}
               />
             </div>
           </foreignObject>
@@ -50,7 +35,11 @@ export default function Hex({ data }) {
         {onShowForm && (
           <foreignObject x="100" y="100" width="250" height="250">
             <div xmlns="http://www.w3.org/1999/xhtml">
-              <Form data={data} onClose={onUpdateHandler} type={"update"} />
+              <Form
+                data={data}
+                onClose={() => setOnShowForm(false)}
+                type={"update"}
+              />
             </div>
           </foreignObject>
         )}
@@ -62,7 +51,7 @@ export default function Hex({ data }) {
           onClick={() => setOnShowDetails(!onShowDetails)}
         />
 
-        <g onClick={() => onAddHandler()}>
+        <g onClick={() => setOnShowAddForm(!onShowAddForm)}>
           <circle cx="115" cy="60" r="10" fill="white" />
           <text dx="106" dy="70" fontSize="30">
             +
@@ -73,7 +62,7 @@ export default function Hex({ data }) {
             <div xmlns="http://www.w3.org/1999/xhtml">
               <Form
                 data={{ id: data.id }}
-                onClose={onUpdateHandler}
+                onClose={() => setOnShowAddForm(false)}
                 type="add"
               />
             </div>
