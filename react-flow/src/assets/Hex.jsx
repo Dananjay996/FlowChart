@@ -9,43 +9,12 @@ export default function Hex({ data }) {
   // console.log(data);
   function showForm() {
     setOnShowForm(!onShowForm);
-    // // Create a form element
-    // const form = document.createElement("form");
-    // form.className = "form-box";
-
-    // // Create input field for changing name
-    // const input = document.createElement("input");
-    // input.type = "text";
-    // input.placeholder = "Enter new name...";
-    // input.value = data.DisplayName;
-    // input.className = "form-input"; // Add class to input element
-    // form.appendChild(input);
-
-    // // Create submit button
-    // const submitBtn = document.createElement("input");
-    // submitBtn.type = "submit";
-    // submitBtn.value = "Submit";
-    // submitBtn.className = "form-submit-btn"; // Add class to submit button element
-    // form.appendChild(submitBtn);
-
-    // // Add event handler for form submission
-    // form.addEventListener("submit", (e) => {
-    //   e.preventDefault();
-    //   const newName = input.value;
-    //   // Perform action with new name, e.g. update display or send data to server
-    //   console.log(`New name ${data.DisplayName}: ${newName}`);
-    //   // Remove form from DOM
-    //   form.remove();
-    // });
-
-    // // Append form to DOM
-    // document.body.appendChild(form);
   }
 
   const onCloseHandler = () => {
     setOnShowDetails(false);
   };
-  const onEditHandler = () => {
+  const onUpdateHandler = () => {
     setOnShowForm(false);
   };
 
@@ -65,14 +34,18 @@ export default function Hex({ data }) {
         {onShowDetails && (
           <foreignObject x="100" y="100" width="250" height="250">
             <div xmlns="http://www.w3.org/1999/xhtml">
-              <Detail data={data} onClose={onCloseHandler} />
+              <Detail
+                data={data}
+                onClose={onCloseHandler}
+                onUpdate={showForm}
+              />
             </div>
           </foreignObject>
         )}
         {onShowForm && (
           <foreignObject x="100" y="100" width="250" height="250">
             <div xmlns="http://www.w3.org/1999/xhtml">
-              <Form data={data} onEdit={onEditHandler} />
+              <Form data={data} onEdit={onUpdateHandler} />
             </div>
           </foreignObject>
         )}
