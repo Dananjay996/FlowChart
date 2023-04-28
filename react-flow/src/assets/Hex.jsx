@@ -6,6 +6,7 @@ import Detail from "./Detail";
 export default function Hex({ data }) {
   const [onShowDetails, setOnShowDetails] = useState(false);
   const [onShowForm, setOnShowForm] = useState(false);
+  const [onShowAddForm, setOnShowAddForm] = useState(false);
   // console.log(data);
   function showForm() {
     setOnShowForm(!onShowForm);
@@ -17,6 +18,10 @@ export default function Hex({ data }) {
   const onUpdateHandler = () => {
     setOnShowForm(false);
   };
+  const onAddHandler = () => {
+    setOnShowAddForm(!onShowAddForm);
+  };
+  console.log("hex", data);
 
   return (
     <>
@@ -45,7 +50,7 @@ export default function Hex({ data }) {
         {onShowForm && (
           <foreignObject x="100" y="100" width="250" height="250">
             <div xmlns="http://www.w3.org/1999/xhtml">
-              <Form data={data} onEdit={onUpdateHandler} />
+              <Form data={data} onClose={onUpdateHandler} type={"update"} />
             </div>
           </foreignObject>
         )}
@@ -57,12 +62,23 @@ export default function Hex({ data }) {
           onClick={() => setOnShowDetails(!onShowDetails)}
         />
 
-        <g onClick={() => showForm()}>
+        <g onClick={() => onAddHandler()}>
           <circle cx="115" cy="60" r="10" fill="white" />
           <text dx="106" dy="70" fontSize="30">
             +
           </text>
         </g>
+        {onShowAddForm && (
+          <foreignObject x="100" y="100" width="250" height="250">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+              <Form
+                data={{ id: data.id }}
+                onClose={onUpdateHandler}
+                type="add"
+              />
+            </div>
+          </foreignObject>
+        )}
       </svg>
     </>
   );

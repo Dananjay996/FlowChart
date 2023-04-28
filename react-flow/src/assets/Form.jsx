@@ -4,14 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { jsonActions } from "../store/jsonSlice";
 import Input from "../components/Form/Input";
 
-function Form({ data, onEdit }) {
+function Form({ data, onClose, type }) {
   const [onInput, setonInput] = useState({
     id: data.id,
-    displayName: data.DisplayName,
-    description: data.description,
+    displayName: data.DisplayName || "",
+    description: data.description || "",
   });
-  //   console.log("form", onInput.displayName);
-  const jsonData = useSelector((state) => state.jsonHelper.data);
   const dispatch = useDispatch();
 
   const onChangeHandler = (e, prop) => {
@@ -26,15 +24,25 @@ function Form({ data, onEdit }) {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("submitted");
-    // console.log("val array is: ", onInput);
-    onEdit();
-    dispatch(
-      jsonActions.modifyDisplayName({
-        id: onInput.id,
-        DisplayName: onInput.displayName,
-        description: onInput.description,
-      })
-    );
+    if (type == "update") {
+      dispatch(
+        jsonActions.modifyData({
+          id: onInput.id,
+          DisplayName: onInput.displayName,
+          description: onInput.description,
+        })
+      );
+    } else if (type == "add") {
+      console.log("onInput", onInput);
+      dispatch(
+        jsonActions.addData({
+          id: onInput.id,
+          DisplayName: onInput.displayName,
+          description: onInput.description,
+        })
+      );
+      onClose();
+    }
   };
   return (
     <div className="w-full max-w-md m-auto">

@@ -36,7 +36,6 @@ function Form() {
     e.preventDefault();
     console.log("Clicked");
     console.log("val array is: ", val);
-    // dispatch(modifyDisplayName(id, val));
   };
 
   return (
