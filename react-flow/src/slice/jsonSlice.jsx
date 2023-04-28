@@ -27,8 +27,8 @@ export const jsonSlice = createSlice({
   reducers: {
     modifyDisplayName: (state, action) => {
       const { id, newDisplayName } = action.payload;
-
-      console.log("state", state, action);
+      console.log("id", id, "displayname", newDisplayName);
+      console.log("state", state.data, action.payload);
 
       // Modify the state using the modifyDisplayNameById function
       // const updatedData = modifyDisplayNameById(id, newDisplayName, state.data);

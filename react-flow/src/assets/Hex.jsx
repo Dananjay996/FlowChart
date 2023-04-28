@@ -45,6 +45,9 @@ export default function Hex({ data }) {
   const onCloseHandler = () => {
     setOnShowDetails(false);
   };
+  const onEditHandler = () => {
+    setOnShowForm(false);
+  };
 
   return (
     <>
@@ -69,7 +72,7 @@ export default function Hex({ data }) {
         {onShowForm && (
           <foreignObject x="100" y="100" width="250" height="250">
             <div xmlns="http://www.w3.org/1999/xhtml">
-              <Form data={data} />
+              <Form data={data} onEdit={onEditHandler} />
             </div>
           </foreignObject>
         )}

@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { modifyDisplayName } from "../slice/jsonSlice";
 import Input from "../components/Form/Input";
 
-function Form({ data }) {
+function Form({ data, onEdit }) {
   const [onInput, setonInput] = useState({
     displayName: data.DisplayName,
     description: data.description,
   });
-//   console.log("form", onInput.displayName);
+  //   console.log("form", onInput.displayName);
   const jsonData = useSelector((state) => state.jsonHelper.initialState);
   const dispatch = useDispatch();
 
@@ -26,6 +26,7 @@ function Form({ data }) {
     e.preventDefault();
     console.log("submitted");
     // console.log("val array is: ", onInput);
+    onEdit();
     dispatch(modifyDisplayName(data.id, onInput.displayName));
   };
   return (
