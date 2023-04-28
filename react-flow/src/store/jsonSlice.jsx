@@ -7,10 +7,10 @@ const jsonSlice = createSlice({
   initialState: data,
   reducers: {
     modifyDisplayName(state, action) {
-      const { id, displayName } = action.payload;
+      const { id } = action.payload;
 
       // Modify the state using the modifyDisplayNameById function
-      state = modifyDisplayNameById(id, displayName, state);
+      state = modifyDisplayNameById(id, state, action.payload);
 
       // Return the updated state
     },

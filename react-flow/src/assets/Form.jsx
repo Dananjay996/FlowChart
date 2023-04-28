@@ -31,7 +31,8 @@ function Form({ data, onEdit }) {
     dispatch(
       jsonActions.modifyDisplayName({
         id: onInput.id,
-        displayName: onInput.displayName,
+        DisplayName: onInput.displayName,
+        description: onInput.description,
       })
     );
   };
