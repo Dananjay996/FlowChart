@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Button from "../components/UI/Button";
 import Form from "./Form";
+import Detail from "./Detail";
 
 export default function Hex({ data }) {
   const [onShowDetails, setOnShowDetails] = useState(false);
   const [onShowForm, setOnShowForm] = useState(false);
-  console.log(data);
+  // console.log(data);
   function showForm() {
     setOnShowForm(!onShowForm);
     // // Create a form element
@@ -41,8 +42,8 @@ export default function Hex({ data }) {
     // document.body.appendChild(form);
   }
 
-  const submitHandler = () => {
-    setOnShowForm(!onShowForm);
+  const onCloseHandler = () => {
+    setOnShowDetails(false);
   };
 
   return (
@@ -61,20 +62,7 @@ export default function Hex({ data }) {
         {onShowDetails && (
           <foreignObject x="100" y="100" width="250" height="250">
             <div xmlns="http://www.w3.org/1999/xhtml">
-              <div className=" bg-blue-500 opacity-0 animate-fade  fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center transition-opacity duration-300 ease-in-out">
-                <div className="bg-white p-4 rounded-md shadow-md">
-                  <h2 className="text-lg font-semibold mb-2">
-                    {data.DisplayName}
-                  </h2>
-                  <p className="text-gray-600 mb-4">{data.description}</p>
-                  <button
-                    id="closePopupBtn"
-                    className="bg-gray-500 text-white px-3 py-1 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
+              <Detail data={data} onClose={onCloseHandler} />
             </div>
           </foreignObject>
         )}

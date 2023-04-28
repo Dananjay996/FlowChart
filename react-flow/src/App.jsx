@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 
 export default function App() {
   const data = useSelector((state) => state.jsonHelper);
-  console.log("App", data);
   const transformedData = transformData(data);
   return (
     <div className="App">

@@ -9,7 +9,7 @@ function Form({ data }) {
     displayName: data.DisplayName,
     description: data.description,
   });
-  console.log("form", onInput.displayName);
+//   console.log("form", onInput.displayName);
   const jsonData = useSelector((state) => state.jsonHelper.initialState);
   const dispatch = useDispatch();
 
@@ -24,8 +24,8 @@ function Form({ data }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("Clicked");
-    console.log("val array is: ", onInput);
+    console.log("submitted");
+    // console.log("val array is: ", onInput);
     dispatch(modifyDisplayName(data.id, onInput.displayName));
   };
   return (
