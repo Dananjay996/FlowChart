@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from "react";
 
-function Input({ onChange, placeholder = "Number", value = null }) {
+function Input({ onChange, placeholder = "Number", value = "" }) {
   return (
     <div>
       <input

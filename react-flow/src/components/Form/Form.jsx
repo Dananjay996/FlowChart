@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import InputFull from "./InputFull";
 import Button from "../UI/Button";
 import { useSelector, useDispatch } from "react-redux";
-import { modifyDisplayName } from "../../slice/jsonSlice";
+// import { modifyDisplayName } from "../../slice/jsonSlice";
 
 function Form() {
-  const node = useSelector((state) => state.jsonHelper.modifyDisplayName);
-  const dispatch = useDispatch();
+  // const node = useSelector((state) => state.jsonHelper.modifyDisplayName);
+  // const dispatch = useDispatch();
 
   const [val, setVal] = useState([[]]);
 

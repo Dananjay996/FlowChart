@@ -12,5 +12,5 @@ export function modifyDisplayNameById(id, newDisplayName, jsonData) {
       }
     }
   }
-  console.log("json mmodify", jsonData);
+  console.log("json modify", jsonData);
 }

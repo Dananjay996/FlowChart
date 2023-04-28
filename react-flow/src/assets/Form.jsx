@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import Button from "../components/UI/Button";
 import { useSelector, useDispatch } from "react-redux";
-import { modifyDisplayName } from "../slice/jsonSlice";
+import { jsonActions } from "../store/jsonSlice";
 import Input from "../components/Form/Input";
 
 function Form({ data, onEdit }) {
   const [onInput, setonInput] = useState({
+    id: data.id,
     displayName: data.DisplayName,
     description: data.description,
   });
   //   console.log("form", onInput.displayName);
-  const jsonData = useSelector((state) => state.jsonHelper.initialState);
+  const jsonData = useSelector((state) => state.jsonHelper.data);
   const dispatch = useDispatch();
 
   const onChangeHandler = (e, prop) => {
@@ -27,7 +28,12 @@ function Form({ data, onEdit }) {
     console.log("submitted");
     // console.log("val array is: ", onInput);
     onEdit();
-    dispatch(modifyDisplayName(data.id, onInput.displayName));
+    dispatch(
+      jsonActions.modifyDisplayName({
+        id: onInput.id,
+        displayName: onInput.displayName,
+      })
+    );
   };
   return (
     <div className="w-full max-w-md m-auto">
