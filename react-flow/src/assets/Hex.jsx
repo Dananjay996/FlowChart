@@ -16,14 +16,19 @@ export default function Hex({ data }) {
         xmlns="http://www.w3.org/2000/svg"
         x="-15px"
         y="-15px"
-        viewBox="0 0 500 500"
+        viewBox="0 0 400 500"
         width="120"
         height="120"
-
         // onMouseLeave={() => setOnShowDetails(false)}
       >
         {onShowDetails && (
-          <foreignObject x="100" y="100" width="250" height="250">
+          <foreignObject
+            x="100"
+            y="100"
+            width="250"
+            height="250"
+            style={{ transform: "rotate(-90deg)", translate: "0rem 30rem" }}
+          >
             <div xmlns="http://www.w3.org/1999/xhtml">
               <Detail
                 data={data}
@@ -34,7 +39,13 @@ export default function Hex({ data }) {
           </foreignObject>
         )}
         {onShowForm && (
-          <foreignObject x="100" y="100" width="250" height="250">
+          <foreignObject
+            x="100"
+            y="100"
+            width="250"
+            height="250"
+            // style={{ transform: "rotate(30deg)" }}
+          >
             <div xmlns="http://www.w3.org/1999/xhtml">
               <Form
                 data={data}
@@ -57,8 +68,8 @@ export default function Hex({ data }) {
         />
 
         <g onClick={() => setOnShowAddForm(!onShowAddForm)}>
-          <circle cx="115" cy="60" r="10" fill="white" />
-          <text dx="106" dy="70" fontSize="30">
+          <circle cx="85" cy="77" r="10" fill="white" />
+          <text dx="77" dy="87" fontSize="30">
             +
           </text>
         </g>
