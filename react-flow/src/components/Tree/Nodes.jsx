@@ -39,7 +39,7 @@ export default (props) => {
               {nodeRender(node, i)}
             </g>
 
-            <g>
+            <g transform="rotate(-90)">
               <text
                 className="text-call-name"
                 dy="20"
@@ -47,15 +47,6 @@ export default (props) => {
               >
                 {node.data.DisplayName}
               </text>
-
-              {/* <rect
-                className="plus-icon"
-                dy="20" // Adjust x and y coordinates to position the icon
-                dx={-node.data.DisplayName.length * 2 - 13}
-                width="20"
-                height="20"
-                onClick={() => handlePlusIconClick(node)} // Add onClick event handler to handle click event
-              /> */}
             </g>
           </g>
         );
