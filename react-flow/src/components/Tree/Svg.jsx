@@ -55,7 +55,7 @@ export default (props) => {
   return (
     <svg ref={refSvg}>
       <g className="d3-tree-main" ref={refMain}>
-        <g transform={`translate(${translate}) scale(${scale})`}>
+        <g transform={`translate(${translate}) scale(${scale}) rotate(90)`}>
           {nodes && <Links links={links} nodes={nodes} />}
           {links && <Nodes nodes={nodes} nodeRender={nodeRender} />}
         </g>
