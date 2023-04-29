@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "../components/UI/Button";
-import Form from "./Form";
-import Detail from "./Detail";
+import Form from "./components/Form";
+import Detail from "./components/Detail";
 
 export default function Hex({ data }) {
   const [onShowDetails, setOnShowDetails] = useState(false);

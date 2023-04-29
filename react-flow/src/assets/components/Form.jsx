@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Button from "../components/UI/Button";
+import Button from "../../components/UI/Button";
 import { useSelector, useDispatch } from "react-redux";
-import { jsonActions } from "../store/jsonSlice";
-import Input from "../components/Form/Input";
+import { jsonActions } from "../../store/jsonSlice";
+import Input from "../../components/Form/Input";
 
 function Form({ data, onClose, type }) {
   const [onInput, setonInput] = useState({
