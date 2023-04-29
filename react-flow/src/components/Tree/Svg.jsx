@@ -34,10 +34,7 @@ export default (props) => {
       const treeLayout = tree().size([width, height]).nodeSize(NODE_SIZE)(data);
       const nodes = treeLayout.descendants();
       const links = treeLayout.links();
-      const translate = [
-        width / 2 - (data.height * NODE_SIZE[1]) / 3,
-        height / 2,
-      ];
+      const translate = [width - (data.height * NODE_SIZE[1]) / 3, height / 8];
       const scale = width / ((data.height + 1) * NODE_SIZE[1]);
       return { nodes, links, translate, scale };
     } else {
