@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import DeletePopUp from "./DeletePopUp";
+import { useDispatch } from "react-redux";
+import { jsonActions } from "../../store/jsonSlice";
 
-function Detail({ data, onClose, onUpdate, onDelete }) {
+function Detail({ data, onClose, onUpdate }) {
+  const dispatch = useDispatch();
+
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   function handleDeleteChildNodes() {
     setShowDeletePopup(true);
@@ -10,6 +14,7 @@ function Detail({ data, onClose, onUpdate, onDelete }) {
   function handleDeleteConfirm() {
     // delete the child nodes here
     setShowDeletePopup(false);
+    dispatch(jsonActions.deleteData({ id: data.id }));
   }
 
   function handleDeleteCancel() {
@@ -49,7 +54,6 @@ function Detail({ data, onClose, onUpdate, onDelete }) {
         </div>
       </div>
       <div>
-        <button onClick={handleDeleteChildNodes}>Delete Child Nodes</button>
         {showDeletePopup && (
           <div className="bg-blue-500 opacity-0 animate-fade  fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center items-center transition-opacity duration-300 ease-in-out">
             <DeletePopUp

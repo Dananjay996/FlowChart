@@ -1,6 +1,10 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 import data from "../components/mocks/data-vis.json";
-import { addChildById, modifyDataById } from "../helper/jsonHelper";
+import {
+  addChildById,
+  deleteDataById,
+  modifyDataById,
+} from "../helper/jsonHelper";
 
 const jsonSlice = createSlice({
   name: "jsonHelper",
@@ -8,6 +12,7 @@ const jsonSlice = createSlice({
   reducers: {
     modifyData(state, action) {
       const { id } = action.payload;
+
       // Modify the state using the modifyDisplayNameById function
       state = modifyDataById(id, state, action.payload);
     },
@@ -15,6 +20,11 @@ const jsonSlice = createSlice({
       const { id } = action.payload;
       // Modify the state using the modifyDisplayNameById function
       state = addChildById(id, state, action.payload);
+    },
+    deleteData(state, action) {
+      const { id } = action.payload;
+      // Modify the state using the modifyDisplayNameById function
+      state = deleteDataById(id, state);
     },
   },
 });

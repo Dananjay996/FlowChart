@@ -7,6 +7,7 @@ export function modifyDataById(id, jsonData, obj = {}) {
       // If the current property is the 'id' key and its value matches the input ID
       if (obj == {}) {
         jsonData = {};
+        console.log("deleted");
       } else {
         for (var key1 in obj) {
           jsonData[key1] = obj[key1];
@@ -30,6 +31,21 @@ export function addChildById(id, jsonData, childObj) {
         jsonData["Childs"] = [];
       }
       jsonData["Childs"].push({ ...childObj, id: crypto.randomUUID() }); // Add the child object to the 'Childs' array
+      break;
+    }
+  }
+}
+export function deleteDataById(id, jsonData) {
+  for (var key in jsonData) {
+    if (typeof jsonData[key] === "object" && jsonData[key] !== null) {
+      // If the current property is an object (nested JSON)
+      deleteDataById(id, jsonData[key]); // Recursively search in the nested JSON
+    } else if (key === "id" && jsonData[key] === id) {
+      // If the current property is the 'id' key and its value matches the input ID
+
+      jsonData["Childs"] = [];
+      console.log("deleted");
+
       break;
     }
   }
