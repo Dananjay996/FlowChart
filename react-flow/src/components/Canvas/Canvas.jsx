@@ -1,61 +1,109 @@
-import React, { useCallback, useState } from "react";
-import ReactFlow, {
-  MiniMap,
-  Controls,
-  Background,
-  useNodesState,
-  useEdgesState,
-  applyNodeChanges,
-  addEdge,
-} from "reactflow";
+import React, { useRef, useEffect } from "react";
+import { select, hierarchy, tree, linkHorizontal } from "d3";
+import useResizeObserver from "./useResizeObserver";
 
-import "reactflow/dist/style.css";
-import { useSelector, useDispatch } from "react-redux";
-import { addEdges, addNodes } from "../../../slices/CanvaSlice";
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
 
-// const initialNodes = [
-//   { id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
-//   { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-// ];
-// const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
+function Canvas({ data }) {
+  const svgRef = useRef();
+  const wrapperRef = useRef();
+  const dimensions = useResizeObserver(wrapperRef);
 
-export default function Canvas() {
-  const node = useSelector((state) => state.counter.nodes);
-  const edge = useSelector((state) => state.counter.edges);
-  // const dispatch = useDispatch();
-  const [nodes, setNodes] = useState(node);
-  const [edges, setEdges] = useState(edge);
-  console.log("Node", node);
-  console.log("Edge", edge);
+  // we save data to see if it changed
+  const previouslyRenderedData = usePrevious(data);
 
-  const onNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    [setNodes]
-  );
-  const onEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-    [setEdges]
-  );
-  const onConnect = useCallback(
-    (connection) => setEdges((eds) => addEdge(connection, eds)),
-    [setEdges]
-  );
+  // will be called initially and on every data change
+  useEffect(() => {
+    const svg = select(svgRef.current);
+
+    // use dimensions from useResizeObserver,
+    // but use getBoundingClientRect on initial render
+    // (dimensions are null for the first render)
+    const { width, height } =
+      dimensions || wrapperRef.current.getBoundingClientRect();
+
+    // transform hierarchical data
+    const root = hierarchy(data);
+    const treeLayout = tree().size([height, width]);
+
+    const linkGenerator = linkHorizontal()
+      .x((link) => link.x)
+      .y((link) => link.y);
+
+    // enrich hierarchical data with coordinates
+    treeLayout(root);
+
+    console.warn("descendants", root.descendants());
+    console.warn("links", root.links());
+
+    // nodes
+    svg
+      .selectAll(".node")
+      .data(root.descendants())
+      .join((enter) => enter.append("circle").attr("opacity", 0))
+      .attr("class", "node")
+      .attr("cx", (node) => node.x)
+      .attr("cy", (node) => node.y)
+      .attr("r", 4)
+      .transition()
+      .duration(500)
+      .delay((node) => node.depth * 300)
+      .attr("opacity", 1);
+
+    // links
+    const enteringAndUpdatingLinks = svg
+      .selectAll(".link")
+      .data(root.links())
+      .join("path")
+      .attr("class", "link")
+      .attr("d", linkGenerator)
+      .attr("stroke-dasharray", function () {
+        const length = this.getTotalLength();
+        return `${length} ${length}`;
+      })
+      .attr("stroke", "black")
+      .attr("fill", "none")
+      .attr("opacity", 1);
+
+    if (data !== previouslyRenderedData) {
+      enteringAndUpdatingLinks
+        .attr("stroke-dashoffset", function () {
+          return this.getTotalLength();
+        })
+        .transition()
+        .duration(500)
+        .delay((link) => link.source.depth * 500)
+        .attr("stroke-dashoffset", 0);
+    }
+
+    // labels
+    svg
+      .selectAll(".label")
+      .data(root.descendants())
+      .join((enter) => enter.append("text").attr("opacity", 0))
+      .attr("class", "label")
+      .attr("x", (node) => node.x)
+      .attr("y", (node) => node.y + 30)
+      .attr("text-anchor", "middle")
+      .attr("font-size", 24)
+      .text((node) => node.data.name)
+      .transition()
+      .duration(500)
+      .delay((node) => node.depth * 300)
+      .attr("opacity", 1);
+  }, [data, dimensions, previouslyRenderedData]);
 
   return (
-    <div
-      style={{ width: "80%", height: "50vh" }}
-      className="border-2 block m-auto my-8"
-    >
-      <ReactFlow
-        nodes={node}
-        edges={edge}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-      >
-        <Controls />
-        <Background variant="dots" gap={12} size={1} />
-      </ReactFlow>
+    <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
+      <svg ref={svgRef} className="w-full h-[50rem]"></svg>
     </div>
   );
 }
+
+export default Canvas;

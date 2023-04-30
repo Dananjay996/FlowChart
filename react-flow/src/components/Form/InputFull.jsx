@@ -1,5 +1,3 @@
-import { ChangeEventHandler, FormEventHandler } from "react";
-import Dropdown from "./Dropdown";
 import Input from "./Input";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { IoMdAddCircle } from "react-icons/io";

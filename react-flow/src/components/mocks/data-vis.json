@@ -1,0 +1,315 @@
+{
+  "data": [
+    {
+      "DisplayName": "Data",
+      "id": "1",
+      "description": "List of all data visualization tool",
+      "Childs": [
+        {
+          "id": "2",
+
+          "DisplayName": "Interactive tools",
+          "free": true,
+          "description": "Interactive authoring tools",
+          "Childs": [
+            {
+              "id": "3",
+
+              "DisplayName": "Browser-based",
+              "description": "Web-based 'cloud' applications for authoring data visualisations",
+              "free": true,
+              "Childs": [
+                {
+                  "id": "4",
+
+                  "DisplayName": "Datawrapper",
+                  "description": "An open-source platform for publishing charts on the web. Cloud-based or self-hosted.",
+                  "url": "https://datawrapper.de/",
+                  "free": true
+                },
+                {
+                  "id": "5",
+
+                  "DisplayName": "Google Sheets",
+                  "description": "Spreadsheet in the cloud with charting",
+                  "free": true
+                },
+                {
+                  "id": "6",
+
+                  "DisplayName": "plotly",
+                  "description": "Cloud-based interactive tool for creating data visualisations",
+                  "url": "https://plot.ly/",
+                  "free": true
+                },
+                {
+                  "id": "7",
+
+                  "DisplayName": "RAW",
+                  "description": "Open-source interactive tool for creating and exporting D3-like charts",
+                  "url": "http://raw.densitydesign.org/",
+                  "free": true
+                }
+              ]
+            },
+            {
+              "id": "8",
+
+              "DisplayName": "Desktop",
+              "description": "Destop-based applications for authoring data visualisations",
+
+              "Childs": [
+                {
+                  "id": "9",
+
+                  "DisplayName": "Tableau Desktop",
+                  "description": "Powerful tool for data analytics and visualisation",
+                  "url": "http://www.tableausoftware.com/products/desktop"
+                },
+                {
+                  "id": "10",
+
+                  "DisplayName": "Tableau Public",
+                  "description": "Free version of Tableau Desktop where charts are public",
+                  "url": "http://www.tableausoftware.com/products/public",
+                  "free": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "11",
+
+          "DisplayName": "Coding",
+          "description": "Code-based data visualisation creation",
+          "free": true,
+          "Childs": [
+            {
+              "id": "12",
+
+              "DisplayName": "JavaScript",
+              "description": "The language behind most (all?) browser-based data visualisations",
+              "free": true,
+              "Childs": [
+                {
+                  "id": "13",
+
+                  "DisplayName": "Charting libraries",
+                  "description": "Off-the-shelf pre-designed charts. Easy to use but less flexible.",
+                  "free": true,
+                  "Childs": [
+                    {
+                      "id": "14",
+
+                      "DisplayName": "Google Charts",
+                      "description": "A good selection of charts including bar, line, scatter, geo, pie, donut, org etc.",
+                      "url": "https://developers.google.com/chart/",
+                      "free": true
+                    },
+                    {
+                      "id": "15",
+
+                      "DisplayName": "HighCharts",
+                      "description": "A well maintained commercial library of commonly used chart types",
+                      "url": "https://www.highcharts.com/"
+                    },
+                    {
+                      "id": "16",
+
+                      "DisplayName": "InfoVis",
+                      "description": "A lovely selection of charts including bar, pie, sunburst, icicle, network, trees etc.",
+                      "url": "https://philogb.github.io/jit/",
+                      "free": true
+                    },
+                    {
+                      "id": "17",
+
+                      "DisplayName": "Mapping",
+                      "description": "Libraries for visualising geographic data",
+                      "free": true,
+                      "Childs": [
+                        {
+                          "id": "18",
+
+                          "DisplayName": "Kartograph",
+                          "description": "Lovely vector based mapping library with good browser support",
+                          "url": "http://kartograph.org/",
+                          "free": true
+                        },
+                        {
+                          "id": "19",
+
+                          "DisplayName": "Leaflet",
+                          "description": "Tile-based mapping library",
+                          "url": "http://leafletjs.com/",
+                          "free": true,
+                          "Childs": [
+                            {
+                              "id": "4",
+
+                              "DisplayName": "Datawrapper",
+                              "description": "An open-source platform for publishing charts on the web. Cloud-based or self-hosted.",
+                              "url": "https://datawrapper.de/",
+                              "free": true
+                            },
+                            {
+                              "id": "5",
+
+                              "DisplayName": "Google Sheets",
+                              "description": "Spreadsheet in the cloud with charting",
+                              "free": true
+                            },
+                            {
+                              "id": "6",
+
+                              "DisplayName": "plotly",
+                              "description": "Cloud-based interactive tool for creating data visualisations",
+                              "url": "https://plot.ly/",
+                              "free": true
+                            },
+                            {
+                              "id": "7",
+
+                              "DisplayName": "RAW",
+                              "description": "Open-source interactive tool for creating and exporting D3-like charts",
+                              "url": "http://raw.densitydesign.org/",
+                              "free": true
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "20",
+
+                      "DisplayName": "MetricsGraphics.js",
+                      "description": "Beautiful line, scatter and histogram charts built on top of D3",
+                      "url": "http://metricsgraphicsjs.org/",
+                      "free": true
+                    },
+                    {
+                      "id": "21",
+
+                      "DisplayName": "NVD3",
+                      "description": "A general purpose charting library built on top of D3",
+                      "url": "http://nvd3.org/",
+                      "free": true
+                    },
+                    {
+                      "id": "22",
+
+                      "DisplayName": "Sigma",
+                      "description": "Library for visualising networks",
+                      "url": "http://sigmajs.org/",
+                      "free": true
+                    }
+                  ]
+                },
+                {
+                  "id": "23",
+
+                  "DisplayName": "Custom coded",
+                  "description": "For maximum flexibility, custom coding is the way to go. These libraries will lend a hand.",
+                  "free": true,
+                  "Childs": [
+                    {
+                      "id": "24",
+
+                      "DisplayName": "D3",
+                      "description": "The jewel in the crown of web-based data visualisation. A library packed full of components for building any data visualisation you can imagine.",
+                      "url": "https://d3js.org/",
+                      "free": true
+                    },
+                    {
+                      "id": "25",
+
+                      "DisplayName": "Ractive",
+                      "description": "Relatively new, Ractive helps you make your HTML and SVG interactive",
+                      "url": "http://www.ractivejs.org/",
+                      "free": true
+                    },
+                    {
+                      "id": "26",
+
+                      "DisplayName": "Raphaël",
+                      "description": "A general purpose drawing library with good browser support",
+                      "url": "http://raphaeljs.com/",
+                      "free": true
+                    },
+                    {
+                      "id": "27",
+
+                      "DisplayName": "Snap.svg",
+                      "description": "A modern version of Raphaël that supports modern browsers",
+                      "url": "http://snapsvg.io/",
+                      "free": true
+                    },
+                    {
+                      "id": "28",
+
+                      "DisplayName": "Variance",
+                      "description": "A declarative, mark-up based data visualisation library",
+                      "url": "https://variancecharts.com/"
+                    },
+                    {
+                      "id": "29",
+
+                      "DisplayName": "Vega",
+                      "description": "A declarative language for specifying data visualistions",
+                      "url": "https://trifacta.github.io/vega/",
+                      "free": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "30",
+
+              "DisplayName": "Other",
+              "description": "Non-JavaScript languages for producing web-based data visualisations",
+              "free": true,
+              "Childs": [
+                {
+                  "id": "31",
+
+                  "DisplayName": "Python",
+                  "description": "Python's a very popular language in data science and is a pleasant language to learn and use",
+                  "free": true,
+                  "Childs": [
+                    {
+                      "id": "32",
+
+                      "DisplayName": "Bokeh",
+                      "description": "A powerful tool for producing interactive plots, dashboards and data applications",
+                      "url": "https://bokeh.pydata.org/",
+                      "free": true
+                    }
+                  ]
+                },
+                {
+                  "id": "33",
+
+                  "DisplayName": "R",
+                  "description": "Very popular language for data science",
+                  "free": true,
+                  "Childs": [
+                    {
+                      "id": "34",
+
+                      "DisplayName": "Shiny",
+                      "description": "A platform for producing web applications using R",
+                      "url": "http://shiny.rstudio.com/",
+                      "free": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
