@@ -1,68 +1,60 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const Canvas = () => {
+const Box = () => {
   const canvasRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [rectPosition, setRectPosition] = useState({ x: 10, y: 10 });
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [boxPosition, setBoxPosition] = useState({ x: 50, y: 50 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+    const boxWidth = 100;
+    const boxHeight = 100;
 
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const drawBox = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "red";
+      ctx.fillRect(boxPosition.x, boxPosition.y, boxWidth, boxHeight);
+      ctx.strokeStyle = "#000";
+      ctx.stroke();
+    };
 
-    // Draw the rectangle
-    ctx.fillStyle = "#ff0000";
-    ctx.fillRect(rectPosition.x, rectPosition.y, 50, 50);
-    ctx.fillRect(rectPosition.x, rectPosition.y, 50, 50);
-  }, [rectPosition]);
+    drawBox();
+  }, [boxPosition]);
 
   const handleMouseDown = (e) => {
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-
-    // Calculate the initial position of the rectangle
-    const initialX = e.clientX - rect.left;
-    const initialY = e.clientY - rect.top;
-
-    // Set the isDragging state to true
     setIsDragging(true);
-
-    // Add a "mousemove" event listener to the canvas
-    // canvas.addEventListener("mousemove", handleMouseMove);
-
-    //change coordinates of rectangle on mouse move without adding listener
-    console.log("down", isDragging);
-    canvas.onmousemove = (e) => {
-      // Calculate the new position of the rectangle
-      const newX = e.clientX - rect.left - initialX + rectPosition.x;
-      const newY = e.clientY - rect.top - initialY + rectPosition.y;
-
-      setRectPosition({ x: newX, y: newY });
-    };
+    setMousePosition({ x: e.clientX, y: e.clientY });
   };
 
   const handleMouseUp = () => {
-    // Set the isDragging state to false
     setIsDragging(false);
-    console.log("up", isDragging);
+  };
 
-    // Remove the "mousemove" event listener from the canvas
-    const canvas = canvasRef.current;
-    // canvas.removeEventListener("mousemove", handleMouseMove);
+  const handleMouseMove = (e) => {
+    if (isDragging) {
+      const deltaX = e.clientX - mousePosition.x;
+      const deltaY = e.clientY - mousePosition.y;
+      setBoxPosition({
+        x: boxPosition.x + deltaX,
+        y: boxPosition.y + deltaY,
+      });
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    }
   };
 
   return (
     <canvas
       ref={canvasRef}
-      width={500}
+      width={1000}
       height={500}
-      style={{ border: "1px solid black" }}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove}
+      className="border-2 border-black "
     />
   );
 };
 
-export default Canvas;
+export default Box;
