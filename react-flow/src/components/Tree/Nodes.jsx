@@ -29,7 +29,7 @@ export default (props) => {
               .filter((ancestor) => ancestor.ancestors().length === 2)[0].data
               .DisplayName
           : "";
-        return (
+         return (
           <g
             key={i}
             transform={`translate(${node.y},${node.x})`}
