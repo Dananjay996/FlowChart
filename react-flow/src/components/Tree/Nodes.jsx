@@ -1,9 +1,13 @@
 import { interpolate } from "d3-interpolate";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import * as d3 from "d3";
+
 
 export default (props) => {
   const [color, setColor] = useState({});
   const { nodes, nodeRender } = props;
+  const svgRef = useRef()
+
   const interpolated = interpolate(1, 0.3);
 
   useEffect(() => {
@@ -20,8 +24,21 @@ export default (props) => {
       });
   }, [nodes]);
 
+ const gRef = useRef(null);
+
+  useEffect(() => {
+    const gElement = d3.select(gRef.current);
+
+    const dragHandler = d3.drag().on('drag', (event) => {
+      const { x, y } = event;
+      gElement.attr('transform', `translate(${x},${y})`);
+    });
+
+    gElement.call(dragHandler);
+  }, []);
+
   return (
-    <g className="d3-tree-nodes">
+    <g className="d3-tree-nodes" >
       {nodes.map((node, i) => {
         const ancestorName = node.parent
           ? node
@@ -30,24 +47,17 @@ export default (props) => {
               .DisplayName
           : "";
          return (
-          <g
+           <g
+            ref={ gRef} 
             key={i}
             transform={`translate(${node.y},${node.x})`}
             style={{ fill: color[ancestorName] }}
           >
-            <g transform={`scale(${interpolated(node.depth * 0.1)})`}>
+             <g transform={`scale(${interpolated(node.depth * 0.1)})`} >
               {nodeRender(node, i)}
             </g>
 
-            <g transform="rotate(-90)">
-              <text
-                className="text-call-name"
-                dy="20"
-                dx={-node.data.DisplayName.length * 2 - 13}
-              >
-                {node.data.DisplayName}
-              </text>
-            </g>
+            
           </g>
         );
       })}
