@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "../components/UI/Button";
 import Form from "./components/Form";
 import Detail from "./components/Detail";
+import * as d3 from "d3";
+
 
 export default function Hex({ data }) {
   const [onShowDetails, setOnShowDetails] = useState(false);
   const [onShowForm, setOnShowForm] = useState(false);
   const [onShowAddForm, setOnShowAddForm] = useState(false);
+  const svgRef = useRef()
+
+    useEffect(() => {
+    const svgElement = d3.select(svgRef.current);
+
+    const dragHandler = d3.drag().on('drag', (event) => {
+      svgElement.attr('x', event.x-5).attr('y', event.y-15);
+    });
+
+    svgElement.call(dragHandler);
+  }, []);
 
   return (
     <>
@@ -20,6 +33,7 @@ export default function Hex({ data }) {
         width="120"
         height="120"
         // onMouseLeave={() => setOnShowDetails(false)}
+        ref = {svgRef}
       >
         {onShowDetails && (
           <foreignObject

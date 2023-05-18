@@ -1,35 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
-const canvasWidth = 1000; // Replace 'width' with the actual width of your canvas
-const canvasHeight = 1000; // Replace 'height' with the actual height of your canvas
-
-function dragstart(event, d) {
-  console.log(event.x, event.y);
-  d3.select(this).raise().attr("stroke", "black");
-}
-
-function dragmove(event, d) {
-  let x = event.x;
-  let y = event.y;
-
-  // Limit the x-coordinate within the canvas bounds
-  x = Math.max(0, Math.min(canvasWidth, x));
-
-  // Limit the y-coordinate within the canvas bounds
-  y = Math.max(0, Math.min(canvasHeight, y));
-
-  d.x = x;
-  d.y = y;
-  d3.select(this).attr("transform", `translate(${x},${y})`);
-  console.log("drag", x, y);
-}
-
-function dragend(event, d) {
-  d3.select(this).attr("stroke", null);
-}
-
-
 export default function Logo() {
    const svgRef = useRef(null);
 
@@ -37,7 +8,7 @@ export default function Logo() {
     const svgElement = d3.select(svgRef.current);
 
     const dragHandler = d3.drag().on('drag', (event) => {
-      svgElement.attr('x', event.x).attr('y', event.y);
+      svgElement.attr('x', event.x-5).attr('y', event.y-15);
     });
 
     svgElement.call(dragHandler);
