@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import * as d3 from "d3";
 
 export default function Logo() {
+   const svgRef = useRef(null);
+
+  useEffect(() => {
+    const svgElement = d3.select(svgRef.current);
+
+    const dragHandler = d3.drag().on('drag', (event) => {
+      svgElement.attr('x', event.x-5).attr('y', event.y-15);
+    });
+
+    svgElement.call(dragHandler);
+  }, []);
   return (
     <>
       <svg
@@ -11,6 +23,7 @@ export default function Logo() {
         viewBox="0 0 25 29"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        ref={svgRef}
       >
         <path
           fillRule="evenodd"

@@ -1,0 +1,1551 @@
+{
+  "name": "Compliance",
+  "version": "1.0",
+  "vaccines": [
+    {
+      "name": "DTAP",
+      "type": "rule",
+      "decisions": [
+        {
+          "event": {
+            "type": "compliant",
+            "params": {
+              "status": 1,
+              "message": "DTAP Compliant"
+            }
+          },
+          "conditions": {
+            "any": [
+              {
+                "all": [
+                  {
+                    "fact": "date",
+                    "value": "dob+6W-4D",
+                    "invalid": "Dosage - 1 should be given on or after 6 weeks (Grace period of 4 days) of age",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W-4D",
+                    "invalid": "Dosage - 2 should be given on or after 4 weeks (Grace period of 4 days)  from dosage - 1",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.2.dosageDt+4W-4D",
+                    "invalid": "Dosage - 3 should be administered after 4 weeks (-4 days) from dosage - 2",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.3.dosageDt+6M-4D",
+                        "invalid": "Dosage - 4 should be given on or after 6 months (Grace period of 4 days) from dosage - 3 and 4 years (Grace period of 4 days) of age , and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+4Y-4D",
+                        "invalid": "Dosage - 4 should be given on or after 6 months (Grace period of 4 days) from dosage - 3 and 4 years (Grace period of 4 days) of age , and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevAdminDosage.dosageDt+6M-4D",
+                        "invalid": "Dosage - 4 should be given on or after 6 months (Grace period of 4 days) from dosage - 3 and 4 years (Grace period of 4 days) of age , and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "fact": "student.grade",
+                    "value": "[\"K\",\"1\",\"2\",\"3\",\"4\",\"5\",\"6\"]",
+                    "invalid": "Valid if student is less than 7th Grade",
+                    "operator": "in"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "DTAP Scenario-1"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "student.grade",
+                    "value": "[\"7\",\"8\",\"9\",\"10\",\"11\",\"12\"]",
+                    "invalid": "Valid if student is on or after 7th Grade",
+                    "operator": "in"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "dob+6W-4D",
+                    "invalid": "Dosage - 1 should be given on or after 6 weeks (Grace period of 4 days) of age",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W-4D",
+                    "invalid": "Dosage - 2 should be given on or after 4 weeks (Grace period of 4 days)  from dosage - 1",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.2.dosageDt+6M-4D",
+                        "invalid": "Dosage - 3 should be given on or after 6 months (Grace period of 4 days) from dosage - 2 and 4 years (Grace period of 4 days) of age",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+4Y-4D",
+                        "invalid": "Dosage - 3 should be given on or after 6 months (Grace period of 4 days) from dosage - 2 and 4 years (Grace period of 4 days) of age",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "dob+7Y-4D",
+                        "invalid": "Dosage - 4 (Booster) should be given on or after 7 years (Grace period of 4 days) of age, and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevAdminDosage.dosageDt+6M-4D",
+                        "invalid": "Dosage - 4 (Booster) should be given on or after 7 years (Grace period of 4 days) of age, and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "DTAP Scenario-2"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "student.grade",
+                    "value": "[\"7\",\"8\",\"9\",\"10\",\"11\",\"12\"]",
+                    "invalid": "Student should be on or after 7th Grade",
+                    "operator": "in"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "dob+6W-4D",
+                    "invalid": "Dosage - 1 should be given on or after 6 weeks (Grace period of 4 days) of age",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W-4D",
+                    "invalid": "Dosage - 2 should be given on or after 4 weeks (Grace period of 4 days)  from dosage - 1",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.2.dosageDt+6M-4D",
+                        "invalid": "Dosage - 3 should be given on or after 6 months (Grace period of 4 days) from dosage - 2 and 4 years (Grace period of 4 days) of age, and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+4Y-4D",
+                        "invalid": "Dosage - 3 should be given on or after 6 months (Grace period of 4 days) from dosage - 2 and 4 years (Grace period of 4 days) of age, and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevAdminDosage.dosageDt+6M-4D",
+                        "invalid": "Dosage - 3 should be given on or after 6 months (Grace period of 4 days) from dosage - 2 and 4 years (Grace period of 4 days) of age, and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "fact": "TDAP",
+                    "value": "exemptions",
+                    "invalid": "Valid if Student is made exempt from TDAP dose",
+                    "operator": "in"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "DTAP Scenario-3"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "ruleEffDt",
+                    "value": "dob+7Y-4D",
+                    "invalid": "Valid if checked on or after 7 years (Grace period of 4 days) of Age",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "dob+1Y-4D",
+                        "invalid": "Dosage - 1 should be given on or after 1 year (Grace period of 4 days) and before 7 Y (Grace period of 4 days) of age",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+7Y-4D",
+                        "invalid": "Dosage - 1 should be given on or after 1 year (Grace period of 4 days) and before 7 Y (Grace period of 4 days) of age",
+                        "operator": "lessThan"
+                      }
+                    ]
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W-4D",
+                    "invalid": "Dosage - 2 should be given on or after 4 weeks (Grace period of 4 days) from dosage - 1",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.2.dosageDt+6M-4D",
+                        "invalid": "Dosage - 3 should be given on or after 6 months (Grace period of 4 days) from dosage - 2 and 7 years (Grace period of 4 days) of age, and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+7Y-4D",
+                        "invalid": "Dosage - 3 should be given on or after 6 months (Grace period of 4 days) from dosage - 2 and 7 years (Grace period of 4 days) of age, and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevAdminDosage.dosageDt+6M-4D",
+                        "invalid": "Dosage - 3 should be given on or after 6 months (Grace period of 4 days) from dosage - 2 and 7 years (Grace period of 4 days) of age, and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "DTAP Scenario-4"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "ruleEffDt",
+                    "value": "dob+7Y-4D",
+                    "invalid": "valid if checked on or after 7 years (Grace period of 4 days) of age",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "dob+6W-4D",
+                        "invalid": "Dosage - 1 should be given between 6 weeks (Grace period of 4 days) and 1 year (Grace period of 4 days) of age",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+1Y-4D",
+                        "invalid": "Dosage - 1 should be given between 6 weeks (Grace period of 4 days) and 1 year (Grace period of 4 days) of age",
+                        "operator": "lessThan"
+                      }
+                    ]
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W-4D",
+                    "invalid": "Dosage - 2 should be given on or after 4 weeks (Grace period of 4 days) of dosage - 1",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.2.dosageDt+4W-4D",
+                    "invalid": "Dosage - 3 should be given on or after 4 weeks (Grace period of 4 days) of dosage - 2",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.3.dosageDt+6M-4D",
+                        "invalid": "Dosage - 4 should be given on or after 6 months (Grace period of 4 days) from Dosagse 2 and 7 years (Grace period of 4 days) of age, and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+7Y-4D",
+                        "invalid": "Dosage - 4 should be given on or after 6 months (Grace period of 4 days) from Dosagse 2 and 7 years (Grace period of 4 days) of age, and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevAdminDosage.dosageDt+6M-4D",
+                        "invalid": "Dosage - 4 should be given on or after 6 months (Grace period of 4 days) from Dosagse 2 and 7 years (Grace period of 4 days) of age, and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "fact": "ruleEffDt",
+                    "value": "dob+7Y-4D",
+                    "invalid": "Valid if checked on or after 7 years (Grace period of 4 days) of age",
+                    "operator": "greaterThanInclusive"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "DTAP Scenario-5"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "date",
+                    "value": "dob+7Y-4D",
+                    "invalid": "Dosage - 1 should be given on or after 7 years (Grace period of 4 days) of age",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W-4D",
+                    "invalid": "Dosage - 2 should be given on or after 4 weeks (Grace period of 4 days) from dosage - 1",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.2.dosageDt+6M-4D",
+                        "invalid": "Dosage - 3 should be given on or after 6 months (Grace period of 4 days) from dosage - 2 , and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevAdminDosage.dosageDt+6M-4D",
+                        "invalid": "Dosage - 3 should be given on or after 6 months (Grace period of 4 days) from dosage - 2 , and 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "DTAP Scenario-6"
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "type": "default",
+            "params": {
+              "status": 0,
+              "message": "DTAP - Non compliant"
+            }
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "dosages",
+          "type": "array",
+          "value": "{vaccines['DTAP']}"
+        },
+        {
+          "name": "exemption",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "HEPATITISB",
+      "type": "rule",
+      "decisions": [
+        {
+          "event": {
+            "type": "compliant",
+            "params": {
+              "status": 1,
+              "message": "HEPATITISB Compliant"
+            }
+          },
+          "conditions": {
+            "any": [
+              {
+                "all": [
+                  {
+                    "fact": "date",
+                    "value": "dob",
+                    "invalid": "Dosage - 1 should be given any time on or after DOB",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W-4D",
+                    "invalid": "Dosage - 2 should be given  on or after 4 weeks (Grace period of 4 days) from dosage - 1",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.2.dosageDt+8W-4D",
+                        "invalid": "Dosage - 3 should be given on or after 8 weeks (Grace period of 4 days) from dosage - 2 and 16 weeks (Grace period of 4 days) from dosage - 1",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.1.dosageDt+16W-4D",
+                        "invalid": "Dosage - 3 should be given on or after 8 weeks (Grace period of 4 days) from dosage - 2 and 16 weeks (Grace period of 4 days) from dosage - 1",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "fact": "date",
+                    "value": "dob+24W-4D",
+                    "invalid": "Dosage - 4 should be given on or after 24 weeks (Grace period of 4 days) from DOB",
+                    "operator": "greaterThanInclusive"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "HEPATITISB Scenario-1"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "date",
+                    "value": "dob",
+                    "invalid": "Dosage - 1 should be given any time on or after DOB",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W-4D",
+                    "invalid": "Dosage - 2 should be given on or after 4 weeks (Grace period of 4 days) from Dosgae 1",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.2.dosageDt+8W-4D",
+                        "invalid": "Dosage - 3 should be given on or after 8 weeks (Grace period of 4 days) from dosage - 2 and 16 weeks (Grace period of 4 days) from dosage - 1 and 24 weeks (Grace period of 4 days) from DOB",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.1.dosageDt+16W-4D",
+                        "invalid": "Dosage - 3 should be given on or after 8 weeks (Grace period of 4 days) from dosage - 2 and 16 weeks (Grace period of 4 days) from dosage - 1 and 24 weeks (Grace period of 4 days) from DOB",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+24W-4D",
+                        "invalid": "Dosage - 3 should be given on or after 8 weeks (Grace period of 4 days) from dosage - 2 and 16 weeks (Grace period of 4 days) from dosage - 1 and 24 weeks (Grace period of 4 days) from DOB",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "HEPATITISB Scenario-2"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "date",
+                    "value": "dob+11Y-4D",
+                    "invalid": "Dosage - 1 should be given on or after 11 years (Grace period of 4 days) from DOB",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4M-4D",
+                    "invalid": "Dosage - 2 should be given on or after 4 months (Grace period of 4 days) from dosage - 1",
+                    "operator": "greaterThanInclusive"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "HEPATITISB Scenario-3"
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "type": "default",
+            "params": {
+              "status": 0,
+              "message": "HEPATITISB - Non compliant"
+            }
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "dosages",
+          "type": "array",
+          "value": "{vaccines['HEPATITISB']}"
+        },
+        {
+          "name": "exemption",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "MCV4",
+      "type": "rule",
+      "decisions": [
+        {
+          "event": {
+            "type": "compliant",
+            "params": {
+              "status": 1,
+              "message": "MCV4 Compliant"
+            }
+          },
+          "conditions": {
+            "any": [
+              {
+                "all": [
+                  {
+                    "fact": "student.grade",
+                    "value": "[\"K\",\"1\",\"2\",\"3\",\"4\",\"5\",\"6\"]",
+                    "invalid": "Students in K to 6 are Compliant without any dosage",
+                    "operator": "in"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "MCV4 Scenario-1"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "student.grade",
+                    "value": "[\"7\",\"8\",\"9,\"10,\"11\"]",
+                    "invalid": "Student should be in 7th to 11th grade and within PA or out of state",
+                    "operator": "in"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "dob+10-4D",
+                    "invalid": "1st dosage should be given on or after 10 years (Grace period of 4 days) of age",
+                    "operator": "greaterThanInclusive"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "MCV4 Scenario-2"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "student.grade",
+                    "value": "12",
+                    "invalid": "Student should be in 12th Grade",
+                    "operator": "equal"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "dob+16Y-4D",
+                    "invalid": "dosageshould be given on or after 16 years (Grace period of 4 days) of age",
+                    "operator": "greaterThanInclusive"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "MCV4 Scenario-3"
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "type": "default",
+            "params": {
+              "status": 0,
+              "message": "MCV4 - Non compliant"
+            }
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "dosages",
+          "type": "array",
+          "value": "{vaccines['MCV4']}"
+        },
+        {
+          "name": "exemption",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "MMR",
+      "type": "rule",
+      "decisions": [
+        {
+          "event": {
+            "type": "compliant",
+            "params": {
+              "status": 1,
+              "message": "MMR Compliant"
+            }
+          },
+          "conditions": {
+            "any": [
+              {
+                "all": [
+                  {
+                    "fact": "date",
+                    "value": "dob+12M-4D",
+                    "invalid": "First Dose should be given after age 12 months",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W",
+                    "invalid": "Second Dose should be given 28 days after first dose",
+                    "operator": "greaterThanInclusive"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "MMR Scenario-1"
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "type": "default",
+            "params": {
+              "status": 0,
+              "message": "MMR - Non compliant"
+            }
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "dosages",
+          "type": "array",
+          "value": "{vaccines['MMR']}"
+        },
+        {
+          "name": "exemption",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "MMR_VZV",
+      "type": "rule",
+      "decisions": [
+        {
+          "event": {
+            "type": "compliant",
+            "params": {
+              "status": 1,
+              "message": "MMR_VZV Compliant"
+            }
+          },
+          "conditions": {
+            "any": [
+              {
+                "all": [
+                  {
+                    "fact": "VARICELLA",
+                    "value": "student.diseases",
+                    "invalid": "Student should be exempted from VZV dosages if he has VARICELLA DISEASE",
+                    "operator": "in"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"MMR\"",
+                        "invalid": "1st dosage of MMR should be given on or after 12 months (Grace period of 4 days) of age",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+12M-4D",
+                        "invalid": "1st dosage of MMR should be given on or after 12 months (Grace period of 4 days) of age",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"MMR\"",
+                        "invalid": "2nd dosage of MMR should be given after 4 weeks from 1st dosage of MMR",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.1.dosageDt+4W",
+                        "invalid": "2nd dosage of MMR should be given after 4 weeks from 1st dosage of MMR",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "MMR_VZV Scenario-1"
+              },
+              {
+                "all": [
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"MMR\"",
+                        "invalid": "1st dosage of this live vaccine should be given on or after 12 months (Grace period of 4 days) of age",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+12M-4D",
+                        "invalid": "1st dosage of this live vaccine should be given on or after 12 months (Grace period of 4 days) of age",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"MMR\"",
+                        "invalid": "2nd dosage of this live vaccine should be given on or after 28 days from 1st live vaccine",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.1.dosageDt+4W",
+                        "invalid": "2nd dosage of this live vaccine should be given on or after 28 days from 1st live vaccine",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"VZV\"",
+                        "invalid": "live vaccines should be 28 days apart. However, different live vaccines can be administered on same day",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+12M-4D",
+                        "invalid": "live vaccines should be 28 days apart. However, different live vaccines can be administered on same day",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"VZV\"",
+                        "invalid": "live vaccines should be 28 days apart.  However, different live vaccines can be administered on same  day",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.3.dosageDt+4W",
+                        "invalid": "live vaccines should be 28 days apart.  However, different live vaccines can be administered on same  day",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "MMR_VZV Scenario-2"
+              },
+              {
+                "all": [
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"VZV\"",
+                        "invalid": "1st dosage of this live vaccine should be given on or after 12 months (Grace period of 4 days) of age",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+12M-4D",
+                        "invalid": "1st dosage of this live vaccine should be given on or after 12 months (Grace period of 4 days) of age",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"VZV\"",
+                        "invalid": "2nd dosage of this live vaccine should be given on or after 28 days from 1st live vaccine",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.1.dosageDt+4W",
+                        "invalid": "2nd dosage of this live vaccine should be given on or after 28 days from 1st live vaccine",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "MMR_VZV Scenario-3"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "MMR",
+                    "value": "exemptions",
+                    "invalid": "Valid if Student is made exempt from MMR dose",
+                    "operator": "in"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"MMR\"",
+                        "invalid": "1st dosage of this live vaccine should be given on or after 12 months (Grace period of 4 days) of age",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+12M-4D",
+                        "invalid": "1st dosage of this live vaccine should be given on or after 12 months (Grace period of 4 days) of age",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"MMR\"",
+                        "invalid": "2nd dosage of this live vaccine should be given on or after 28 days from 1st live vaccine",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.1.dosageDt+4W",
+                        "invalid": "2nd dosage of this live vaccine should be given on or after 28 days from 1st live vaccine",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "MMR_VZV Scenario-4"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "VZV",
+                    "value": "exemptions",
+                    "invalid": "Valid if Student is made exempt from VZV dose",
+                    "operator": "in"
+                  },
+                  {
+                    "fact": "VZV",
+                    "value": "exemptions",
+                    "invalid": "Valid if Student is made exempt from VZV dose",
+                    "operator": "in"
+                  },
+                  {
+                    "fact": "MMR",
+                    "value": "exemptions",
+                    "invalid": "Valid if Student is made exempt from MMR dose",
+                    "operator": "in"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "MMR_VZV Scenario-5"
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "type": "default",
+            "params": {
+              "status": 0,
+              "message": "MMR_VZV - Non compliant"
+            }
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "dosages",
+          "type": "array",
+          "value": "{vaccines['MMR_VZV']}"
+        },
+        {
+          "name": "exemption",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "PB",
+      "type": "rule",
+      "decisions": [
+        {
+          "event": {
+            "type": "compliant",
+            "params": {
+              "status": 1,
+              "message": "PB Compliant"
+            }
+          },
+          "conditions": {
+            "any": [
+              {
+                "all": [
+                  {
+                    "fact": "student.school.state",
+                    "value": "\"PA\"",
+                    "invalid": "State should be PA",
+                    "operator": "equal"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "dob+6Y-4D",
+                    "invalid": "Should be tested before 6 years (Grace period of 4 days) from DOB",
+                    "operator": "lessThan"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "PB Scenario-1"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "student.school.state",
+                    "value": "\"PA\"",
+                    "invalid": "Compliant if state is not PA",
+                    "operator": "notEqual"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "PB Scenario-2"
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "type": "default",
+            "params": {
+              "status": 0,
+              "message": "PB - Non compliant"
+            }
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "dosages",
+          "type": "array",
+          "value": "{vaccines['PB']}"
+        },
+        {
+          "name": "exemption",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "POLIO",
+      "type": "rule",
+      "decisions": [
+        {
+          "event": {
+            "type": "compliant",
+            "params": {
+              "status": 1,
+              "message": "POLIO Compliant"
+            }
+          },
+          "conditions": {
+            "any": [
+              {
+                "all": [
+                  {
+                    "fact": "date",
+                    "value": "dob+6W-4D",
+                    "invalid": "Dosage - 1 should be given on or after 6 weeks (Grace period of 4 days) of age",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W-4D",
+                    "invalid": "Dosage - 2 should be given on or after 4 weeks (Grace period of 4 days) from dosage 1",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"OPV\"",
+                        "invalid": "Dosage - 3 should be of type OPV and given on or after 4 weeks (Grace period of 4 days) from dosage - 2",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.2.dosageDt+4W-4D",
+                        "invalid": "Dosage - 3 should be of type OPV and given on or after 4 weeks (Grace period of 4 days) from dosage - 2",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.3.dosageDt+4W-4D",
+                        "invalid": "Dosage - 4 should be given on or after 4 weeks (Grace period of 4 days) from dosage - 3 and 4 years (Grace period of 4 days) of age, and 4 weeks (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+4Y-4D",
+                        "invalid": "Dosage - 4 should be given on or after 4 weeks (Grace period of 4 days) from dosage - 3 and 4 years (Grace period of 4 days) of age, and 4 weeks (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevAdminDosage.dosageDt+4W-4D",
+                        "invalid": "Dosage - 4 should be given on or after 4 weeks (Grace period of 4 days) from dosage - 3 and 4 years (Grace period of 4 days) of age, and 4 weeks (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "POLIO Scenario-1"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "date",
+                    "value": "dob+6W-4D",
+                    "invalid": "Dosage - 1 should be  given on or after 6 weeks (Grace period of 4 days) of age",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W-4D",
+                    "invalid": "Dosage - 2 should be given on or after 4 weeks (Grace period of 4 days) from dosage - 1",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"IPV\"",
+                        "invalid": "Dosage - 3 should be of type IPV and given on or after 4 weeks (Grace period of 4 days) from dosage - 2",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.2.dosageDt+4W-4D",
+                        "invalid": "Dosage - 3 should be of type IPV and given on or after 4 weeks (Grace period of 4 days) from dosage - 2",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.3.dosageDt+6M-4D",
+                        "invalid": "Dosage - 4 should be given on or after 6 months (Grace period of 4 days) from Ds 3 and 4 years (Grace period of 4 days) of age, and should be 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+4Y-4D",
+                        "invalid": "Dosage - 4 should be given on or after 6 months (Grace period of 4 days) from Ds 3 and 4 years (Grace period of 4 days) of age, and should be 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevAdminDosage.dosageDt+6M-4D",
+                        "invalid": "Dosage - 4 should be given on or after 6 months (Grace period of 4 days) from Ds 3 and 4 years (Grace period of 4 days) of age, and should be 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "any": [
+                      {
+                        "fact": "prevDosages.1.dosageType",
+                        "value": "\"OPV\"",
+                        "invalid": "Any of the dosages should be of type OPV dosage except for dosage - 3",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "prevDosages.2.dosageType",
+                        "value": "\"OPV\"",
+                        "invalid": "Any of the dosages should be of type OPV dosage except for dosage - 3",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "prevDosages.4.dosagetype",
+                        "value": "\"OPV\"",
+                        "invalid": "Any of the dosages should be of type OPV dosage except for dosage - 3",
+                        "operator": "equal"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "POLIO Scenario-2"
+              },
+              {
+                "all": [
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "dob+6W-4D",
+                        "invalid": "Dosage - 1 should be of type IPV and given on or after 6 weeks (Grace period of 4 days) of age",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "type",
+                        "value": "\"IPV\"",
+                        "invalid": "Dosage - 1 should be of type IPV and given on or after 6 weeks (Grace period of 4 days) of age",
+                        "operator": "equal"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.1.dosageDt+4W-4D",
+                        "invalid": "Dosage - 2 should be of type IPV and given on or after 4 weeks (Grace period of 4 days) from dosage - 1",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "type",
+                        "value": "\"IPV\"",
+                        "invalid": "Dosage - 2 should be of type IPV and given on or after 4 weeks (Grace period of 4 days) from dosage - 1",
+                        "operator": "equal"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"IPV\"",
+                        "invalid": "Dosage - 3 should be of type IPV and given on or after 4 weeks (Grace period of 4 days) from dosage - 2",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.2.dosageDt+4W-4D",
+                        "invalid": "Dosage - 3 should be of type IPV and given on or after 4 weeks (Grace period of 4 days) from dosage - 2",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"IPV\"",
+                        "invalid": "Dosage - 4 should be of type IPV and given on or after 6 months (Grace period of 4 days) from dosage - 3 and 4 years (Grace period of 4 days) of age, and should be 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.3.dosageDt+6M-4D",
+                        "invalid": "Dosage - 4 should be of type IPV and given on or after 6 months (Grace period of 4 days) from dosage - 3 and 4 years (Grace period of 4 days) of age, and should be 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+4Y-4D",
+                        "invalid": "Dosage - 4 should be of type IPV and given on or after 6 months (Grace period of 4 days) from dosage - 3 and 4 years (Grace period of 4 days) of age, and should be 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevAdminDosage.dosageDt+6M-4D",
+                        "invalid": "Dosage - 4 should be of type IPV and given on or after 6 months (Grace period of 4 days) from dosage - 3 and 4 years (Grace period of 4 days) of age, and should be 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "POLIO Scenario-3"
+              },
+              {
+                "all": [
+                  {
+                    "fact": "ruleEffDt",
+                    "value": "dob+18Y-4D",
+                    "invalid": "Student is compliant without any dosages, if he is greater than 18 years",
+                    "operator": "greaterThanInclusive"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "POLIO Scenario-4"
+              },
+              {
+                "all": [
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "dob+6W-4D",
+                        "invalid": "Dosage - 1 should be of type IPV and given on or after 6 weeks (Grace period of 4 days) of age",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "type",
+                        "value": "\"IPV\"",
+                        "invalid": "Dosage - 1 should be of type IPV and given on or after 6 weeks (Grace period of 4 days) of age",
+                        "operator": "equal"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.1.dosageDt+4W-4D",
+                        "invalid": "Dosage - 2 should be of type IPV and given on or after 4 weeks (Grace period of 4 days) from dosage - 1",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "type",
+                        "value": "\"IPV\"",
+                        "invalid": "Dosage - 2 should be of type IPV and given on or after 4 weeks (Grace period of 4 days) from dosage - 1",
+                        "operator": "equal"
+                      }
+                    ]
+                  },
+                  {
+                    "all": [
+                      {
+                        "fact": "type",
+                        "value": "\"IPV\"",
+                        "invalid": "Dosage - 3 should be of type IPV and given on or after 6 months (Grace period of 4 days) from dosage - 2 and 4 years (Grace period of 4 days) of age, and should be 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "equal"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevDosages.2.dosageDt+6M-4D",
+                        "invalid": "Dosage - 3 should be of type IPV and given on or after 6 months (Grace period of 4 days) from dosage - 2 and 4 years (Grace period of 4 days) of age, and should be 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "dob+4Y-4D",
+                        "invalid": "Dosage - 3 should be of type IPV and given on or after 6 months (Grace period of 4 days) from dosage - 2 and 4 years (Grace period of 4 days) of age, and should be 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      },
+                      {
+                        "fact": "date",
+                        "value": "prevAdminDosage.dosageDt+6M-4D",
+                        "invalid": "Dosage - 3 should be of type IPV and given on or after 6 months (Grace period of 4 days) from dosage - 2 and 4 years (Grace period of 4 days) of age, and should be 6 months (Grace period of 4 days) after chronologically previous dosage",
+                        "operator": "greaterThanInclusive"
+                      }
+                    ]
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "POLIO Scenario-5"
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "type": "default",
+            "params": {
+              "status": 0,
+              "message": "POLIO - Non compliant"
+            }
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "dosages",
+          "type": "array",
+          "value": "{vaccines['POLIO']}"
+        },
+        {
+          "name": "exemption",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "TDAP",
+      "type": "rule",
+      "decisions": [
+        {
+          "event": {
+            "type": "compliant",
+            "params": {
+              "status": 1,
+              "message": "TDAP Compliant"
+            }
+          },
+          "conditions": {
+            "any": [
+              {
+                "all": [
+                  {
+                    "fact": "student.grade",
+                    "value": "[\"7\",\"8\",\"9,\"10,\"11\"]",
+                    "invalid": "Valid if student is on or after 7th Grade",
+                    "operator": "in"
+                  },
+                  {
+                    "fact": "ruleEffDt",
+                    "value": "dob+10Y-4D",
+                    "invalid": "Valid if student greater than 10 years (Grace period of 4 days) of Age",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "dob+10Y-4D",
+                    "invalid": "Student requires Tdap after age 10 and grade 7 or higher",
+                    "operator": "greaterThanInclusive"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "TDAP Scenario-1"
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "type": "default",
+            "params": {
+              "status": 0,
+              "message": "TDAP - Non compliant"
+            }
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "dosages",
+          "type": "array",
+          "value": "{vaccines['TDAP']}"
+        },
+        {
+          "name": "exemption",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "VZV",
+      "type": "rule",
+      "decisions": [
+        {
+          "event": {
+            "type": "compliant",
+            "params": {
+              "status": 1,
+              "message": "VZV Compliant"
+            }
+          },
+          "conditions": {
+            "any": [
+              {
+                "all": [
+                  {
+                    "fact": "VARICELLA",
+                    "value": "student.diseases",
+                    "invalid": "Student should be exempted from VZV dosages if he has VARICELLA DISEASE",
+                    "operator": "notIn"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "dob+12M-4D",
+                    "invalid": "First Dose should be given after age 12 months",
+                    "operator": "greaterThanInclusive"
+                  },
+                  {
+                    "fact": "date",
+                    "value": "prevDosages.1.dosageDt+4W-4Danddate",
+                    "invalid": "Second Dose should be given 28 days after first dose and after age 15 months",
+                    "operator": "greaterThanInclusive"
+                  }
+                ],
+                "any": "{templates['exemption']}",
+                "name": "VZV Scenario-1"
+              }
+            ]
+          }
+        },
+        {
+          "event": {
+            "type": "default",
+            "params": {
+              "status": 0,
+              "message": "VZV - Non compliant"
+            }
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "name": "dosages",
+          "type": "array",
+          "value": "{vaccines['VZV']}"
+        },
+        {
+          "name": "exemption",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "constants": {
+    "exemptions": ["religious", "medical", "philosophical"]
+  },
+  "decisions": [
+    {
+      "event": {
+        "type": "compliant",
+        "params": {
+          "status": 1,
+          "message": "Compliant"
+        }
+      },
+      "conditions": {
+        "any": [
+          {
+            "all": [
+              {
+                "fact": "DTAP.status",
+                "value": 1,
+                "invalid": "DTAP - Non compliant",
+                "operator": "equal"
+              },
+              {
+                "fact": "HEPATITISB.status",
+                "value": 1,
+                "invalid": "HEPATITISB - Non compliant",
+                "operator": "equal"
+              },
+              {
+                "fact": "MCV4.status",
+                "value": 1,
+                "invalid": "MCV4 - Non compliant",
+                "operator": "equal"
+              },
+              {
+                "fact": "MMR.status",
+                "value": 1,
+                "invalid": "MMR - Non compliant",
+                "operator": "equal"
+              },
+              {
+                "fact": "MMR_VZV.status",
+                "value": 1,
+                "invalid": "MMR_VZV - Non compliant",
+                "operator": "equal"
+              },
+              {
+                "fact": "PB.status",
+                "value": 1,
+                "invalid": "PB - Non compliant",
+                "operator": "equal"
+              },
+              {
+                "fact": "POLIO.status",
+                "value": 1,
+                "invalid": "POLIO - Non compliant",
+                "operator": "equal"
+              },
+              {
+                "fact": "TDAP.status",
+                "value": 1,
+                "invalid": "TDAP - Non compliant",
+                "operator": "equal"
+              },
+              {
+                "fact": "VZV.status",
+                "value": 1,
+                "invalid": "VZV - Non compliant",
+                "operator": "equal"
+              }
+            ],
+            "any": "{templates['exemption']}"
+          }
+        ]
+      }
+    },
+    {
+      "event": {
+        "type": "default",
+        "params": {
+          "status": 0,
+          "message": "Non compliant"
+        }
+      }
+    }
+  ],
+  "effective": "20200101T00:00:00.000Z",
+  "templates": {
+    "exemption": {
+      "facts": [
+        {
+          "fact": "exemption",
+          "value": "{constants['exemptions']}",
+          "operator": "in"
+        }
+      ]
+    }
+  },
+  "attributes": [
+    {
+      "name": "date",
+      "type": "date"
+    },
+    {
+      "name": "dob",
+      "type": "date"
+    },
+    {
+      "name": "grade",
+      "type": "number"
+    },
+    {
+      "name": "vaccines",
+      "type": "object"
+    },
+    {
+      "name": "exemption",
+      "type": "string"
+    }
+  ]
+}
